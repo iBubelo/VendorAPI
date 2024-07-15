@@ -5,7 +5,7 @@
 - [Requirements](#requirements)
 - [Installation](#installation)
 - [Usage](#usage)
-- [Know Issues](#know-issues)
+- [Known Issues](#known-issues)
 
 ## Requirements
 
@@ -53,7 +53,7 @@ The service should use a cache like redis.
 
 ## Installation
 
-Installed Docker with Compose is requred.
+Installed Docker with Compose is required.
 
 ```shell
 git clone https://github.com/iBubelo/VendorAPI.git
@@ -63,15 +63,15 @@ docker compose up --build
 
 ## Usage
 
-Project configered to run using Development environment with Swagger by default.
+The project is configured to run using the Development environment with Swagger by default.
 
-Open <http://localhost:8080/swagger/index.html> in you browser.
+Open <http://localhost:8080/swagger/index.html> in your browser.
 
-JWT Bearer token Auth and Role based authorization were implemented.
-Token should be obtanade with one of the users below.
-Database is initilised with two roles and some data.
+JWT Bearer token Auth and Role-based authorization were implemented.
+Token should be obtained with one of the users below.
+The database is initialized with two roles and some data.
 
-"Admin", has all rights. Can manage users.
+"Admin" has all rights and can manage users.
 
 ```json
 {
@@ -80,7 +80,7 @@ Database is initilised with two roles and some data.
 }
 ```
 
-"Manager", can create and manage Vendor, Bank Account and Contact Person, but not delete.
+"Manager" can create and manage Vendor, Bank Account, and Contact Person, but not delete.
 
 ```json
 {
@@ -89,11 +89,11 @@ Database is initilised with two roles and some data.
 }
 ```
 
-## Know Issues
+## Known Issues
 
-- Test are missing.
+- Tests are missing.
 - Input validation should be improved.
-- Error handling is mininal.
-- Rasid cache can be improved.
-- Documentation is missing.
-- Security (i.e. rate limiting) should be improved.
+- Error handling is minimal.
+- Redis cache can be improved.
+- Documentation can be improved.
+- Security (i.e., rate limiting) should be improved.
