@@ -1,0 +1,31 @@
+services:
+  vendorapi:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "8080:80"
+    depends_on:
+      - sqlite
+      - redis
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - Jwt__Key=21d6dd61-7902-4090-adc6-43bb9553e25b
+      - ConnectionStrings__DefaultConnection=Data Source=/data/VendorDB.db
+      - ConnectionStrings__RedisConnection=redis:6379
+    volumes:
+      - ./sqlite_data:/data
+
+  sqlite:
+    image: keinos/sqlite3
+    volumes:
+    - ./sqlite_data:/data
+  redis:
+    image: redis
+    ports:
+      - "6379:6379"
+
+volumes:
+  mongodb_data:
+  sqlite_data:
+    driver: local
