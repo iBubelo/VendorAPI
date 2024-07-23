@@ -20,7 +20,7 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
 builder.Services.AddSingleton<IConnectionMultiplexer>(ConnectionMultiplexer.Connect(builder.Configuration.GetConnectionString("RedisConnection") ?? string.Empty));
 
 builder.Services.AddAutoMapper(typeof(Program));
-builder.Services.AddTransient<DbInitializerService>();
+builder.Services.AddScoped<DbInitializerService>();
 
 builder.Services.AddScoped<RedisCacheService>();
 builder.Services.AddScoped<JwtService>();
@@ -30,9 +30,7 @@ builder.Services.AddScoped<PhoneValidationService>();
 builder.Services.AddIdentity<User, IdentityRole>()
     .AddEntityFrameworkStores<ApplicationDbContext>()
     .AddRoles<IdentityRole>();
-// .AddDefaultTokenProviders();
 
-// builder.Services.AddAuthorization();
 builder.Services.AddAuthentication(options =>
     {
         options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
@@ -91,16 +89,10 @@ builder.Services.AddSwaggerGen(options =>
     options.IncludeXmlComments(Path.Combine(AppContext.BaseDirectory, xmlFilename));
 });
 
-// builder.Services.AddHttpsRedirection(options =>
-//     {
-//         options.RedirectStatusCode = StatusCodes.Status307TemporaryRedirect;
-//         options.HttpsPort = 8081;
-//     });
 
 var app = builder.Build();
 
 // Ensure the database is created
-// ? Is this the right place to do this?
 using (var scope = app.Services.CreateScope())
 {
     var initializer = scope.ServiceProvider.GetRequiredService<DbInitializerService>();
